@@ -103,21 +103,55 @@ def farm_sunflower():
 		# Prep pumpkin
 	last_farm = "sunflower"
 	
-	# TODO we should optimize sunflowers
+	max_pedals = 0
+	# Ordered list of plots to farm highest first
+	harvest_queue = []
+
+	# Plant the sunflowers
+	quick_print("Planting sunflowers")
 	for plot in target_sunflower_plots:
 		u.go_to_plot(plot)
-		u.set_ground_type(Grounds.Soil)
-		quick_print(get_companion())
+
+		if get_entity_type() == Entities.Sunflower:
+			pedals = measure()
+		else:
+			harvest()
+			u.set_ground_type(Grounds.Soil)
+			plant(Entities.Sunflower)
+			pedals = measure()
+
+		# Insert the current plot into the harvesting queue
+		data = {"plot": plot, "pedals": pedals} 
+		if len(harvest_queue) == 0:
+			harvest_queue.append(data)
+		else:
+			i = 0
+			inserted = False
+			while i < len(harvest_queue):
+				if pedals > harvest_queue[i]["pedals"]:
+					harvest_queue.insert(i, data)
+					inserted = True
+					break
+				i = i + 1
+			if not inserted:
+				harvest_queue.append(data)
+
+	# Harvest the sunflowers
+	quick_print("Harvesting sunflowers")
+	while len(harvest_queue) > 10:
+		u.go_to_plot(harvest_queue[0]["plot"])
 		if can_harvest():
 			harvest()
-		plant(Entities.Sunflower)
+			harvest_queue.pop(0)
+		else:
+			change_hat(Hats.Sunflower_Hat)
 
 # Resource order [function, min, base]
 # 0: function is the callback to start harvesting that resource
 # 1: min is the threshold when farming should begin
 # 2: base is how long to farm until if min is triggered
 farm = {
-	Items.Power:[farm_sunflower, 100, 2000],
+	Items.Power:[farm_sunflower, 1000000, 200000000],
 	Items.Hay:[farm_hay, 500000, 1500000],
 	Items.Wood:[farm_wood, 500000, 1500000],
 	Items.Carrot:[farm_carrot, 500000, 1500000],
