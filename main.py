@@ -151,7 +151,7 @@ def farm_sunflower():
 # 1: min is the threshold when farming should begin
 # 2: base is how long to farm until if min is triggered
 farm = {
-	Items.Power:[farm_sunflower, 1000000, 200000000],
+	Items.Power:[farm_sunflower, 100, 2000],
 	Items.Hay:[farm_hay, 500000, 1500000],
 	Items.Wood:[farm_wood, 500000, 1500000],
 	Items.Carrot:[farm_carrot, 500000, 1500000],
