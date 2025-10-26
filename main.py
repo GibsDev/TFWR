@@ -1,5 +1,6 @@
 import u
 import plots
+import algos
 
 # Keep track of the most recently used farm strategy
 last_farm = ""
@@ -94,12 +95,16 @@ def farm_cactus():
 
 target_sunflower_plots = plots.get_plots_alternating(0, 0, 10, 10)
 
+def sunflower_comp(a, b):
+	return b["pedals"] - a["pedals"]
+
 def farm_sunflower():
 	quick_print("Farming sunflower")
 	
 	global last_farm
 	if not last_farm == "sunflower":
 		quick_print("Prepping sunflower layout")
+		change_hat(Hats.Sunflower_Hat)
 		# Prep pumpkin
 	last_farm = "sunflower"
 	
@@ -121,20 +126,8 @@ def farm_sunflower():
 			pedals = measure()
 
 		# Insert the current plot into the harvesting queue
-		data = {"plot": plot, "pedals": pedals} 
-		if len(harvest_queue) == 0:
-			harvest_queue.append(data)
-		else:
-			i = 0
-			inserted = False
-			while i < len(harvest_queue):
-				if pedals > harvest_queue[i]["pedals"]:
-					harvest_queue.insert(i, data)
-					inserted = True
-					break
-				i = i + 1
-			if not inserted:
-				harvest_queue.append(data)
+		data = {"plot": plot, "pedals": pedals}
+		algos.binary_insert(harvest_queue, data, sunflower_comp)
 
 	# Harvest the sunflowers
 	quick_print("Harvesting sunflowers")
@@ -144,7 +137,8 @@ def farm_sunflower():
 			harvest()
 			harvest_queue.pop(0)
 		else:
-			change_hat(Hats.Sunflower_Hat)
+			# Use this as a delay function
+			_delay = ""
 
 # Resource order [function, min, base]
 # 0: function is the callback to start harvesting that resource
