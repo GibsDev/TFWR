@@ -13,8 +13,9 @@ def farm_hay():
 	quick_print("Farming hay")
 	global last_farm
 	if not last_farm == "hay":
-		# Prep hay
 		quick_print("Prepping hay layout")
+		change_hat(Hats.Straw_Hat)
+		# Prep hay
 		for plot in hay_plots:
 			u.go_to_plot(plot)
 			u.set_ground_type(Grounds.Grassland)
@@ -43,6 +44,7 @@ def farm_wood():
 	global last_farm
 	if not last_farm == "wood":
 		quick_print("Prepping wood layout")
+		change_hat(Hats.Brown_Hat)
 		# Prep wood
 		clear()
 	last_farm = "wood"
@@ -58,6 +60,13 @@ def farm_wood():
 
 def farm_carrot():
 	quick_print("Farming carrot")
+
+	global last_farm
+	if not last_farm == "carrot":
+		quick_print("Prepping carrot layout")
+		change_hat(Hats.Carrot_Hat)
+		# Prep carrot
+	last_farm = "carrot"
 	# TODO
 
 pumpkin_plots1 = plots.get_plots_alternating(0, 0, 6, 6)
@@ -69,6 +78,7 @@ def farm_pumpkin():
 	global last_farm
 	if not last_farm == "pumpkin":
 		quick_print("Prepping pumpkin layout")
+		change_hat(Hats.Pumpkin_Hat)
 		# Prep pumpkin
 	last_farm = "pumpkin"
 	
@@ -91,6 +101,14 @@ def farm_pumpkin():
 	
 def farm_cactus():
 	quick_print("Farming cactus")
+
+	global last_farm
+	if not last_farm == "cactus":
+		quick_print("Prepping cactus layout")
+		change_hat(Hats.Cactus_Hat)
+		# Prep cactus
+	last_farm = "cactus"
+
 	# TODO
 
 target_sunflower_plots = plots.get_plots_alternating(0, 0, 10, 10)
@@ -165,7 +183,7 @@ def plant_item(item):
 	plant(item)
 
 
-target_unlock = Unlocks.Carrots
+target_unlock = Unlocks.Pumpkins
 targets = None
 
 def get_remaining_targets(targets):
