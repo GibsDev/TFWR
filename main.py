@@ -138,7 +138,7 @@ def farm_sunflower():
 			harvest_queue.pop(0)
 		else:
 			# Use this as a delay function
-			_delay = ""
+			d_e_l_a_y = 1
 
 # Resource order [function, min, base]
 # 0: function is the callback to start harvesting that resource
@@ -160,7 +160,7 @@ farm = {
 def plant_item(item):
 	costs = get_remaining_targets(get_cost(item))
 	if costs != None:
-		for cost in list(costs):
+		for cost in costs:
 			farm[cost]()
 	plant(item)
 
@@ -171,7 +171,7 @@ targets = None
 def get_remaining_targets(targets):
 	remaining = {}
 	added = False
-	for target in list(targets):
+	for target in targets:
 		if num_items(target) < targets[target]:
 			remaining[target] = targets[target]
 			added = True
@@ -181,7 +181,7 @@ def get_remaining_targets(targets):
 
 while True:
 	# Get next target unlock
-	for _unlock in list(Unlocks):
+	for _unlock in Unlocks:
 		# Attempt to unlock
 		if unlock(_unlock):
 			continue
@@ -206,7 +206,7 @@ while True:
 			break
 		
 		# Ensure essentials
-		for item in list(farm):
+		for item in farm:
 			func, min, base = farm[item]
 			# Kick off farming if below min
 			if num_items(item) <= min:
@@ -216,7 +216,7 @@ while True:
 				continue
 		
 		# Work toward the targets
-		for target in list(remaining_targets):
+		for target in remaining_targets:
 			if num_items(target) < remaining_targets[target]:
 				farm[target][0]()
 				continue

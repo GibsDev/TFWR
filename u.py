@@ -52,7 +52,7 @@ def go(x, y, harvest=True):
 		
 def get_item_counts():
 	weights = {}
-	for item in list(Items):
+	for item in Items:
 		weights[item] = num_items(item)
 	return weights
 
@@ -92,14 +92,6 @@ def weighted_pick(items, weights):
 		else:
 			roll = roll - percents[i]
 	return items[len(items) - 1]
-	
-# Breaks down the items in a dictionary
-# into a list of tuples [key, value]
-def items(dict):
-	out = []
-	for key in list(dict):
-		out.append([key, dict[key]])
-	return out
 
 # Plant and wait for a companion and return back
 def assert_companion():
