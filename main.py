@@ -9,6 +9,8 @@ import wood_farmer
 import carrot_farmer
 import cactus_farmer
 import weird_farmer
+import gold_farmer
+import poly_farmer
 
 # Keep track of the most recently used farm strategy
 last_farm = ""
@@ -26,6 +28,7 @@ farm = {
 	Items.Pumpkin:[pumpkin_farmer, 500000, 1500000],
 	Items.Cactus:[cactus_farmer, 10000, 100000],
 	Items.Weird_Substance:[weird_farmer, 1000, 20000],
+	Items.Gold:[gold_farmer, 0, 0],
 }
 
 target_unlock = Unlocks.Pumpkins
@@ -73,11 +76,13 @@ while True:
 			while num_items(item) < base:
 				run_farmer(farmer)
 			continue
+
+	run_farmer(poly_farmer)
 	
 	# Work toward the target items
-	for items in remaining_items:
-		if num_items(items) < remaining_items[items]:
-			farmer, min, base = farm[items]
-			run_farmer(farmer)
+	# for items in remaining_items:
+	# 	if num_items(items) < remaining_items[items]:
+	# 		farmer, min, base = farm[items]
+	# 		run_farmer(farmer)
 
 quick_print("Target reached")

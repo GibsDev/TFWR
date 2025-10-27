@@ -5,7 +5,7 @@ import u
 def setup():
 	quick_print("Setting up weird substance farmer")
 	change_hat(Hats.Wizard_Hat)
-    u.go_to(0, 0)
+	u.go_to(0, 0)
 	u.safe_harvest()
 
 def run():
