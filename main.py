@@ -12,6 +12,7 @@ import cactus_farmer
 # Keep track of the most recently used farm strategy
 last_farm = ""
 
+# TODO weird substance
 # Resource order [function, min, base]
 # 0: function is the callback to start harvesting that resource
 # 1: min is the threshold when farming should begin
@@ -25,22 +26,10 @@ farm = {
 	Items.Cactus:[cactus_farmer, 10000, 100000],
 }
 
-# TODO weird substance
-
-# if we run out of resources to plant something
-# don't know it this works
-def plant_item(item):
-	costs = get_remaining_targets(get_cost(item))
-	if costs != None:
-		for cost in costs:
-			farm[cost]()
-	plant(item)
-
-
 target_unlock = Unlocks.Pumpkins
 targets = None
 
-def get_remaining_targets(targets):
+def get_remaining_items(targets):
 	remaining = {}
 	added = False
 	for target in targets:
@@ -51,56 +40,41 @@ def get_remaining_targets(targets):
 		return None
 	return remaining
 
-last_target = None
+last_farmer = None
+
+def run_farmer(farmer):
+	if last_farmer != farmer:
+		farmer.setup()
+	farmer.run()
+
+target_unlock_cost = get_cost(target_unlock)
 
 while True:
-	# Get next target unlock
-	for _unlock in Unlocks:
-		# Attempt to unlock
-		if unlock(_unlock):
+	quick_print("Unlock target: ", target_unlock)
+	
+	# Check if the target is reached
+	remaining_items = get_remaining_items(target_unlock_cost)
+	quick_print(remaining_items)
+	if remaining_items == None:
+		# Target reached!
+		unlock(target_unlock)
+		break
+	
+	# Ensure essentials
+	for item in farm:
+		farmer, min, base = farm[item]
+		# Kick off farming if below min
+		if num_items(item) <= min:
+			# Farm until base value
+			while num_items(item) < base:
+				run_farmer(farmer)
 			continue
-		# TODO we need to come up with a better target selection algorithm
-		# if get_remaining_targets(get_cost(_unlock)) != None and _unlock != Unlocks.Auto_Unlock:
-		# 	target_unlock = _unlock
 	
-	quick_print("target_unlock: ", target_unlock)
+	# Work toward the target items
+	for items in remaining_items:
+		if num_items(items) < remaining_items[items]:
+			farmer, min, base = farm[items]
+			run_farmer(farmer)
+			continue
 
-	# Get resources needed for target unlock
-	targets = get_cost(target_unlock)
-	
-	# Loop until target reached
-	while True:
-		quick_print("target_unlock: ", target_unlock)
-		
-		# Check if the target is reached
-		remaining_targets = get_remaining_targets(targets)
-		quick_print(remaining_targets)
-		if remaining_targets == None:
-			# Target reached!
-			break
-		
-		# Ensure essentials
-		for item in farm:
-			func, min, base = farm[item]
-			# Kick off farming if below min
-			if num_items(item) <= min:
-				# Farm until base value
-				while num_items(item) < base:
-					func()
-				continue
-		
-		# Work toward the targets
-		for target in remaining_targets:
-			if num_items(target) < remaining_targets[target]:
-				# Setup if we are migrating farmers
-				if target != last_target:
-					farm[target][0].setup()
-				# Run the farmer
-				farm[target][0].run()
-				last_target = target
-				continue
-		
-	
-	# Unlock the thing
-	unlock(target_unlock)
-		
+quick_print("Target reached")
