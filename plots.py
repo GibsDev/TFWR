@@ -1,3 +1,5 @@
+import u
+
 def get_all_plots():
 	return get_plots(0, 0, get_world_size(), get_world_size())
 
@@ -51,3 +53,6 @@ def filter(plots, filter):
 			i = i - 1
 		i = i + 1
 	return plots
+
+def get_random_plot():
+	return (u.random_int(get_world_size()), u.random_int(get_world_size()))

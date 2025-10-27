@@ -1,6 +1,9 @@
 import u
+import plots
 
 MAX_QUEUE_SIZE = get_world_size() * get_world_size()
+
+PREFFERED_CHAIN_MIN = 256
 
 def setup():
 	quick_print("Setting up poly farmer")
@@ -22,20 +25,29 @@ def run():
 	plot = (get_pos_x(), get_pos_y())
 	plot_queue.append(plot)
 	planted[plot] = True
-	# TODO replace with max size
 	for i in range(MAX_QUEUE_SIZE):
 		plant_type, plot = get_companion()
 		if plot in planted:
 			# Loop detected!
 			quick_print("Loop detected at ", len(plot_queue), " plots")
-			break
+			# Start a new chain from unused plot if the chain is too small
+			if len(plot_queue) < PREFFERED_CHAIN_MIN:
+				new_chain_start = plots.get_random_plot()
+				while new_chain_start in planted:
+					new_chain_start = plots.get_random_plot()
+				u.go_to_plot(new_chain_start)
+				u.set_ground_type(Grounds.Soil)
+				plant(Entities.Tree)
+				plot_queue.append(new_chain_start)
+				planted[new_chain_start] = True
+				continue
+			else:
+				break
 		else:
 			u.go_to_plot(plot)
 			u.safe_plant(plant_type)
 			plot_queue.append(plot)
 			planted[plot] = True
-
-	quick_print(plot_queue)
 
 	# Farm the chain in reverse order
 	while len(plot_queue) > 0:

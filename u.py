@@ -67,8 +67,9 @@ def safe_plant(plant_type):
 		set_ground_type(Grounds.Soil)
 	plant(plant_type)
 
-def random_index(length):
-	return random() * length // 1
+# Returns a random int from 0-max (exclusive)
+def random_int(max):
+	return random() * max // 1
 
 def random_elem(list):
 	return list[random_index(len(list))]
