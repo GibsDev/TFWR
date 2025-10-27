@@ -53,6 +53,20 @@ def safe_harvest():
 	if can_harvest():
 		harvest()
 
+def safe_plant(plant_type):
+	safe_harvest()
+	if plant_type == Entities.Grass:
+		set_ground_type(Grounds.Grassland)
+	elif plant_type == Entities.Carrot:
+		set_ground_type(Grounds.Soil)
+	elif plant_type == Entities.Sunflower:
+		set_ground_type(Grounds.Soil)
+	elif plant_type == Entities.Cactus:
+		set_ground_type(Grounds.Soil)
+	elif plant_type == Entities.Pumpkin:
+		set_ground_type(Grounds.Soil)
+	plant(plant_type)
+
 def random_index(length):
 	return random() * length // 1
 
