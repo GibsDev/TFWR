@@ -8,6 +8,7 @@ import hay_farmer
 import wood_farmer
 import carrot_farmer
 import cactus_farmer
+import weird_farmer
 
 # Keep track of the most recently used farm strategy
 last_farm = ""
@@ -24,6 +25,7 @@ farm = {
 	Items.Carrot:[carrot_farmer, 500000, 1500000],
 	Items.Pumpkin:[pumpkin_farmer, 500000, 1500000],
 	Items.Cactus:[cactus_farmer, 10000, 100000],
+	Items.Weird_Substance:[weird_farmer, 1000, 20000],
 }
 
 target_unlock = Unlocks.Pumpkins
@@ -43,18 +45,20 @@ def get_remaining_items(targets):
 last_farmer = None
 
 def run_farmer(farmer):
+	global last_farmer
 	if last_farmer != farmer:
 		farmer.setup()
 	farmer.run()
+	last_farmer = farmer
 
 target_unlock_cost = get_cost(target_unlock)
 
 while True:
-	quick_print("Unlock target: ", target_unlock)
-	
+	# quick_print("Unlock target: ", target_unlock)
+
 	# Check if the target is reached
 	remaining_items = get_remaining_items(target_unlock_cost)
-	quick_print(remaining_items)
+	# quick_print(remaining_items)
 	if remaining_items == None:
 		# Target reached!
 		unlock(target_unlock)

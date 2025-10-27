@@ -1,6 +1,9 @@
 import u
 import plots
 
+# We could optimize this strat when we have water
+# With watered plots, we could get away with farming a single row loop
+
 carrot_plots = plots.get_plots_alternating(0, 0, get_world_size(), 4)
 
 def setup():
