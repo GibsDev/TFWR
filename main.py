@@ -75,6 +75,5 @@ while True:
 		if num_items(items) < remaining_items[items]:
 			farmer, min, base = farm[items]
 			run_farmer(farmer)
-			continue
 
 quick_print("Target reached")
