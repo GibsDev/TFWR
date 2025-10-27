@@ -13,7 +13,7 @@ def run():
 	for plot in wood_plots:
 		u.go_to_plot(plot)
 		harvest()
-		if plot["y"] % 2 == plot["x"] % 2:
+		if plot[0] % 2 == plot[1] % 2:
 			plant(Entities.Tree)
 		else:
 			plant(Entities.Bush)
