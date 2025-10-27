@@ -5,6 +5,8 @@ MAX_QUEUE_SIZE = get_world_size() * get_world_size()
 
 PREFFERED_CHAIN_MIN = 256
 
+alternating_plots = plots.get_all_plots_alternating()
+
 def setup():
 	quick_print("Setting up poly farmer")
 	# TODO This strategy probably works better with a smaller world
@@ -49,7 +51,7 @@ def run():
 			plot_queue.append(plot)
 			planted[plot] = True
 
-	# Farm the chain in reverse order
+	# Farm the chain in order to take advantage of companions
 	while len(plot_queue) > 0:
 		target = plot_queue.pop(0)
 		u.go_to_plot(target)
