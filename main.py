@@ -11,6 +11,7 @@ import farmer_cactus
 import farmer_weird
 import farmer_gold
 import farmer_poly
+import farmer_bone
 
 # TODO weird substance
 # Resource order [function, min, base]
@@ -25,6 +26,7 @@ farm = {
 	Items.Pumpkin:[farmer_pumpkin, 500000, 1500000],
 	Items.Cactus:[farmer_cactus, 100000, 1000000],
 	Items.Weird_Substance:[farmer_weird, 1000000, 5000000],
+	Items.Bone:[farmer_bone, 0, 0],
 	Items.Gold:[farmer_gold, 0, 0],
 }
 
