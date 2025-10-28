@@ -12,22 +12,19 @@ import farmer_weird
 import farmer_gold
 import farmer_poly
 
-# Keep track of the most recently used farm strategy
-last_farm = ""
-
 # TODO weird substance
 # Resource order [function, min, base]
 # 0: function is the callback to start harvesting that resource
 # 1: min is the threshold when farming should begin
 # 2: base is how long to farm until if min is triggered
 farm = {
-	Items.Power:[farmer_sunflower, 100, 2000],
+	Items.Power:[farmer_sunflower, 1000, 5000],
 	Items.Hay:[farmer_hay, 500000, 5000000],
 	Items.Wood:[farmer_wood, 500000, 5000000],
 	Items.Carrot:[farmer_carrot, 500000, 1500000],
 	Items.Pumpkin:[farmer_pumpkin, 500000, 1500000],
-	Items.Cactus:[farmer_cactus, 10000, 100000],
-	Items.Weird_Substance:[farmer_weird, 1000, 20000],
+	Items.Cactus:[farmer_cactus, 100000, 1000000],
+	Items.Weird_Substance:[farmer_weird, 1000000, 5000000],
 	Items.Gold:[farmer_gold, 0, 0],
 }
 
