@@ -4,12 +4,16 @@ import plots
 # We could optimize this strat when we have water
 # With watered plots, we could get away with farming a single row loop
 
-carrot_plots = plots.get_plots_alternating(0, 0, get_world_size(), 4)
+carrot_plots = plots.get_plots(0, 0, get_world_size(), 1)
+carrot_plots2 = plots.get_plots(0, 4, get_world_size(), 1)
+for plot in carrot_plots2:
+	carrot_plots.append(plot)
 
 def setup():
 	quick_print("Prepping carrot layout")
 	change_hat(Hats.Carrot_Hat)
 	
+	clear()
 	for plot in carrot_plots:
 		u.go_to_plot(plot)
 		harvest()
@@ -21,5 +25,6 @@ def run():
 	
 	for plot in carrot_plots:
 		u.go_to_plot(plot)
+		quick_print(get_companion())
 		harvest()
 		plant(Entities.Carrot)

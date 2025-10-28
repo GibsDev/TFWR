@@ -76,13 +76,11 @@ while True:
 			while num_items(item) < base:
 				run_farmer(farmer)
 			continue
-
-	run_farmer(poly_farmer)
 	
 	# Work toward the target items
-	# for items in remaining_items:
-	# 	if num_items(items) < remaining_items[items]:
-	# 		farmer, min, base = farm[items]
-	# 		run_farmer(farmer)
+	for items in remaining_items:
+		if num_items(items) < remaining_items[items]:
+			farmer, min, base = farm[items]
+			run_farmer(farmer)
 
 quick_print("Target reached")
