@@ -25,6 +25,5 @@ def run():
 	
 	for plot in carrot_plots:
 		u.go_to_plot(plot)
-		quick_print(get_companion())
 		harvest()
 		plant(Entities.Carrot)
