@@ -6,3 +6,6 @@ def run():
 	quick_print("Farming cactus")
 	# TODO
 		
+if __name__ == "__main__":
+	setup()
+	run()

@@ -18,3 +18,7 @@ def run():
 	while not can_harvest():
 		wait_please = 0
 	harvest()
+
+if __name__ == "__main__":
+	setup()
+	run()

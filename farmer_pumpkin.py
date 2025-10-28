@@ -26,3 +26,7 @@ def run():
 	quick_print("Farming pumpkin")
 	pumpkin(pumpkin_plots1)
 	pumpkin(pumpkin_plots2)
+
+if __name__ == "__main__":
+	setup()
+	run()

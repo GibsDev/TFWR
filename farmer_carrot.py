@@ -27,3 +27,7 @@ def run():
 		u.go_to_plot(plot)
 		harvest()
 		plant(Entities.Carrot)
+
+if __name__ == "__main__":
+	setup()
+	run()

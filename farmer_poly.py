@@ -68,3 +68,7 @@ def run():
 			use_item(Items.Fertilizer)
 			do_some_waiting = 0
 		harvest()
+
+if __name__ == "__main__":
+	setup()
+	run()

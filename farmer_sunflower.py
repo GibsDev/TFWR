@@ -45,3 +45,7 @@ def run():
 		else:
 			# Use this as a delay function
 			d_e_l_a_y = 1
+
+if __name__ == "__main__":
+	setup()
+	run()

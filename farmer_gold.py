@@ -3,3 +3,7 @@ def setup():
 	
 def run():
 	quick_print("Gold farmer is not implemented")
+
+if __name__ == "__main__":
+	setup()
+	run()

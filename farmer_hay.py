@@ -23,3 +23,7 @@ def run():
 	for i in range(get_world_size()):
 		move(East)
 		harvest()
+
+if __name__ == "__main__":
+	setup()
+	run()

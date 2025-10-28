@@ -17,3 +17,7 @@ def run():
 			plant(Entities.Tree)
 		else:
 			plant(Entities.Bush)
+
+if __name__ == "__main__":
+	setup()
+	run()
