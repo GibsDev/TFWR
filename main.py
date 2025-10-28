@@ -2,15 +2,15 @@ import u
 import plots
 import algos
 
-import pumpkin_farmer
-import sunflower_farmer
-import hay_farmer
-import wood_farmer
-import carrot_farmer
-import cactus_farmer
-import weird_farmer
-import gold_farmer
-import poly_farmer
+import farmer_pumpkin
+import farmer_sunflower
+import farmer_hay
+import farmer_wood
+import farmer_carrot
+import farmer_cactus
+import farmer_weird
+import farmer_gold
+import farmer_poly
 
 # Keep track of the most recently used farm strategy
 last_farm = ""
@@ -21,14 +21,14 @@ last_farm = ""
 # 1: min is the threshold when farming should begin
 # 2: base is how long to farm until if min is triggered
 farm = {
-	Items.Power:[sunflower_farmer, 100, 2000],
-	Items.Hay:[hay_farmer, 500000, 5000000],
-	Items.Wood:[wood_farmer, 500000, 5000000],
-	Items.Carrot:[carrot_farmer, 500000, 1500000],
-	Items.Pumpkin:[pumpkin_farmer, 500000, 1500000],
-	Items.Cactus:[cactus_farmer, 10000, 100000],
-	Items.Weird_Substance:[weird_farmer, 1000, 20000],
-	Items.Gold:[gold_farmer, 0, 0],
+	Items.Power:[farmer_sunflower, 100, 2000],
+	Items.Hay:[farmer_hay, 500000, 5000000],
+	Items.Wood:[farmer_wood, 500000, 5000000],
+	Items.Carrot:[farmer_carrot, 500000, 1500000],
+	Items.Pumpkin:[farmer_pumpkin, 500000, 1500000],
+	Items.Cactus:[farmer_cactus, 10000, 100000],
+	Items.Weird_Substance:[farmer_weird, 1000, 20000],
+	Items.Gold:[farmer_gold, 0, 0],
 }
 
 target_unlock = Unlocks.Pumpkins
