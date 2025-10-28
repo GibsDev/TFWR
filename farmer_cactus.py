@@ -2,7 +2,7 @@ import u
 import plots
 import algos
 
-cactus_plots = plots.get_plots_alternating(0, 0, 10, 1)
+CACTUS_LINE_SIZE = get_world_size()
 
 # Cactus takes 1 second to grow
 
@@ -27,7 +27,7 @@ def run():
 	sorted_state = []
 
 	# Plant and measure
-	for i in range(10):
+	for i in range(CACTUS_LINE_SIZE):
 		u.go_to_plot((i, 0))
 		harvest()
 		u.safe_plant(Entities.Cactus)
@@ -39,21 +39,30 @@ def run():
 	quick_print(sorted_state)
 
 	# Move the cactuses around to meet the spec
-	for i in range(10):
-		plot = (i, 0)
-		u.go_to_plot(plot)
-		
-		if measure() != sorted_state[i]:
-			count = 0
-			# Scan for the right size and bring it back
-			while measure() != sorted_state[i]:
-				move(East)
-				count = count + 1
-			for ii in range(count):
-				swap(West)
-				move(West)
+	min_index = 0
+	max_index = CACTUS_LINE_SIZE - 1
 
 	u.go_to_plot((0, 0))
+	while min_index < max_index:
+		grabbed = False
+		# Scan through and grab max
+		for i in range(max_index - min_index):
+			if grabbed or measure() == sorted_state[max_index]:
+				swap(East)
+				grabbed = True
+			move(East)
+		max_index = max_index - 1
+		move(West)
+		grabbed = False
+		# Scan through and grab min
+		for i in range(max_index - min_index):
+			if grabbed or measure() == sorted_state[min_index]:
+				swap(West)
+				grabbed = True
+			move(West)
+		min_index = min_index + 1
+		move(East)
+
 	harvest()
 
 		
