@@ -17,7 +17,7 @@ def pumpkin(target_plots):
 			u.set_ground_type(Grounds.Soil)
 			if can_harvest():
 				harvest()
-			plant_item(Entities.Pumpkin)
+			plant(Entities.Pumpkin)
 	if measure() == first_id:
 		if can_harvest():
 			harvest()
