@@ -1,5 +1,6 @@
 import u
 import plots
+import algos
 
 target_sunflower_plots = plots.get_plots_alternating(0, 0, 10, 10)
 
