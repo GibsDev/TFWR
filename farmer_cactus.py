@@ -23,6 +23,8 @@ def number_comp(a, b):
 def run():
 	quick_print("Farming cactus")
 	
+	# TODO make this 2D
+
 	state = []
 	sorted_state = []
 

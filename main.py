@@ -13,7 +13,6 @@ import farmer_gold
 import farmer_poly
 import farmer_bone
 
-# TODO weird substance
 # Resource order [function, min, base]
 # 0: function is the callback to start harvesting that resource
 # 1: min is the threshold when farming should begin
@@ -30,7 +29,7 @@ farm = {
 	Items.Gold:[farmer_gold, 0, 0],
 }
 
-target_unlock = Unlocks.Pumpkins
+target_unlock = Unlocks.Dinosaurs
 targets = None
 
 def get_remaining_items(targets):
