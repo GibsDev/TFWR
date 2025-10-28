@@ -2,7 +2,10 @@ import u
 import plots
 import algos
 
-target_sunflower_plots = plots.get_plots_alternating(0, 0, 10, 10)
+target_sunflower_plots = []
+for y in range(4):
+	for x in range(20):
+		target_sunflower_plots.append((x, y * 4))
 
 def sunflower_comp(a, b):
 	return b["pedals"] - a["pedals"]
@@ -10,6 +13,7 @@ def sunflower_comp(a, b):
 def setup():
 	quick_print("Setting up sunflower farmer")
 	change_hat(Hats.Sunflower_Hat)
+	clear()
 
 def run():
 	quick_print("Farming sunflowers")
@@ -48,4 +52,5 @@ def run():
 
 if __name__ == "__main__":
 	setup()
-	run()
+	while True:
+		run()

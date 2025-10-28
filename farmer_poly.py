@@ -71,4 +71,5 @@ def run():
 
 if __name__ == "__main__":
 	setup()
-	run()
+	while True:
+		run()
