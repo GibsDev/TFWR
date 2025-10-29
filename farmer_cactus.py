@@ -20,6 +20,16 @@ def left_swap(state):
 def number_comp(a, b):
 	return a - b
 
+def do_sort():
+	sorted = True
+	if measure(West) > measure():
+		swap(West)
+		sorted = False
+	if measure(East) < measure():
+		swap(East)
+		sorted = False
+	return sorted
+
 def run():
 	quick_print("Farming cactus")
 	
@@ -46,21 +56,29 @@ def run():
 
 	u.go_to_plot((0, 0))
 	while min_index < max_index:
-		grabbed = False
+		while measure() == sorted_state[get_pos_x()] and get_pos_x() < max_index:
+			move(East)
+			min_index = min_index + 1
 		# Scan through and grab max
 		for i in range(max_index - min_index):
-			if grabbed or measure() == sorted_state[max_index]:
+			if measure() == sorted_state[max_index]:
+				# "grab" the size we need for the end
 				swap(East)
-				grabbed = True
+			else:
+				do_sort()
 			move(East)
 		max_index = max_index - 1
 		move(West)
-		grabbed = False
+		while measure() == sorted_state[get_pos_x()] and get_pos_x() > min_index:
+			move(West)
+			max_index = max_index - 1
 		# Scan through and grab min
 		for i in range(max_index - min_index):
-			if grabbed or measure() == sorted_state[min_index]:
+			if measure() == sorted_state[min_index]:
+				# "grab" the size we need for the end
 				swap(West)
-				grabbed = True
+			else:
+				do_sort()
 			move(West)
 		min_index = min_index + 1
 		move(East)
