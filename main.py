@@ -29,7 +29,7 @@ farm = {
 	Items.Gold:[farmer_gold, 0, 0],
 }
 
-target_unlock = Unlocks.Dinosaurs
+target_unlock = Unlocks.Cactus
 targets = None
 
 def get_remaining_items(targets):

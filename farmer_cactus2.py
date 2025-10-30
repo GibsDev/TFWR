@@ -2,7 +2,7 @@ import u
 import plots
 import algos
 
-cactus_plots = plots.get_plots_alternating(0, 0, get_world_size(), 10)
+cactus_plots = plots.get_all_plots_alternating()
 size_per_plot = 9 / 9
 
 
