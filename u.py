@@ -73,3 +73,9 @@ def random_int(max):
 
 def random_elem(list):
 	return list[random_index(len(list))]
+
+def fill(item, count):
+	out = []
+	for i in range(count):
+		out.append(item)
+	return out
